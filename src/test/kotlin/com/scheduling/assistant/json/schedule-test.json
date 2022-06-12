@@ -1,0 +1,34 @@
+{
+    "schedule": {
+        "monday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "tuesday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "wednesday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "thursday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "friday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "saturday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        },
+        "sunday": {
+            "start": "06:06 AM",
+            "end": "06:06 AM"
+        }
+    },
+    
+    "timezone": "Pacific Standard Time"
+}
