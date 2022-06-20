@@ -1,9 +1,8 @@
 package com.scheduling.assistant.endpoints
 
-import com.scheduling.assistant.database.UserRepository
+import com.scheduling.assistant.database.repositories.UserRepository
 import com.scheduling.assistant.models.User
-import com.scheduling.assistant.database.models.UserEntity
-import com.scheduling.assistant.utils.Mapper
+import com.scheduling.assistant.utils.ObjectMapper
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,30 +17,28 @@ import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 
 @RestController
-class SetupController {
+class User {
     @Autowired
-    lateinit var repository: UserRepository
+    lateinit var userRepository: UserRepository
 
-    var mapper: Mapper = Mapper()
+    @Autowired
+    lateinit var  objectMapper: ObjectMapper
     
-    @PostMapping("/setup")
+    @PostMapping("/user")
     fun postSetup(timezone: TimeZone, @RequestBody requestBody: User): ResponseEntity<String> {
-        var responseCode: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR
-
-        // if (requestBody.schedule.timezone == "") {
-        //     requestBody.schedule.timezone = timezone.id
-        // }
-
         try {
-            repository.save(mapper.map(requestBody))
-            responseCode = HttpStatus.CREATED
+            userRepository.save(objectMapper.map(requestBody))
+            return ResponseEntity(HttpStatus.CREATED)
+
         } catch (exception: DataIntegrityViolationException) {
-            responseCode = HttpStatus.BAD_REQUEST
             println(exception)
+            return ResponseEntity(HttpStatus.BAD_REQUEST)
         } catch (exception: Exception) {
             println(exception)
         }
 
-        return ResponseEntity(responseCode)
+        return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
     }
+
+    // TODO: patch mapping for changing user information
 }

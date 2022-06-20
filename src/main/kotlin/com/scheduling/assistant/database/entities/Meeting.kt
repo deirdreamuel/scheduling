@@ -1,22 +1,17 @@
-package com.scheduling.assistant.database.models
+package com.scheduling.assistant.database.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
 import javax.persistence.Id
 import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.OneToOne
-import javax.persistence.OneToMany
 import javax.persistence.ManyToMany
 
-
-import javax.persistence.Column
-import javax.persistence.ElementCollection
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="meetings")
+@Table(name="MEETING")
 class MeetingEntity {
     @Id 
     @GeneratedValue(generator="system-uuid")
@@ -34,5 +29,5 @@ class MeetingEntity {
     var host: UserEntity? = null
 
     @ManyToMany
-    var participants: Set<UserEntity>? = null
+    var participants: List<UserEntity>? = null
 }

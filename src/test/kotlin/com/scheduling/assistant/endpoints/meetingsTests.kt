@@ -1,13 +1,13 @@
 package com.scheduling.assistant.endpoints
 
-import com.scheduling.assistant.database.MeetingRepository
-import com.scheduling.assistant.database.UserRepository
-import com.scheduling.assistant.database.models.MeetingEntity
-import com.scheduling.assistant.database.models.UserEntity
+import com.scheduling.assistant.database.repositories.MeetingRepository
+import com.scheduling.assistant.database.repositories.UserRepository
+import com.scheduling.assistant.database.entities.MeetingEntity
+import com.scheduling.assistant.database.entities.UserEntity
 import com.scheduling.assistant.models.Meeting
 import com.scheduling.assistant.models.Messages
-import com.scheduling.assistant.utils.Availability
-import com.scheduling.assistant.utils.Mapper
+import com.scheduling.assistant.engine.Scheduler
+import com.scheduling.assistant.utils.ObjectMapper
 import com.scheduling.assistant.utils.ResponseHandler
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -25,9 +25,9 @@ class MeetingsTests {
     @MockBean
     lateinit var userRepository: UserRepository
     @MockBean
-    lateinit var availability: Availability
+    lateinit var scheduler: Scheduler
     @MockBean
-    lateinit var mapper: Mapper
+    lateinit var objectMapper: ObjectMapper
 
     @Spy
     lateinit var responseHandler: ResponseHandler
@@ -35,7 +35,7 @@ class MeetingsTests {
     lateinit var meetingRepository: MeetingRepository
 
     @InjectMocks
-    lateinit var meetingController: MeetingController
+    lateinit var meetingController: com.scheduling.assistant.endpoints.Meeting
 
     private var validHost: String = "valid-host"
     private var invalidHost: String = "invalid-host"
@@ -45,9 +45,10 @@ class MeetingsTests {
 
     private fun <T> any(type: Class<T>): T = Mockito.any<T>(type)
 
+    // TODO: mock meeting entity from mapper.map() and make sure host and participants are populated
+
     @BeforeEach
     fun setup() {
-
         val validUserEntity = UserEntity()
         validUserEntity.email = validHost
 
@@ -57,11 +58,11 @@ class MeetingsTests {
         Mockito.doReturn(null).`when`(userRepository).getById(invalidHost)
         Mockito.doReturn(null).`when`(userRepository).getByEmail(invalidHost)
 
-        Mockito.doReturn(MeetingEntity()).`when`(mapper).map(any(Meeting::class.java))
+        Mockito.doReturn(MeetingEntity()).`when`(objectMapper).map(any(Meeting::class.java))
 
-        Mockito.doReturn(true).`when`(availability).checkMeeting(validHost, validMeeting)
-        Mockito.doReturn(false).`when`(availability).checkMeeting(validHost, invalidMeeting)
-        Mockito.doReturn(false).`when`(availability).checkMeeting(invalidHost, validMeeting)
+        Mockito.doReturn(true).`when`(scheduler).isMeetingAvailable(validHost, validMeeting)
+        Mockito.doReturn(false).`when`(scheduler).isMeetingAvailable(validHost, invalidMeeting)
+        Mockito.doReturn(false).`when`(scheduler).isMeetingAvailable(invalidHost, validMeeting)
 
         MockitoAnnotations.openMocks(this)
     }

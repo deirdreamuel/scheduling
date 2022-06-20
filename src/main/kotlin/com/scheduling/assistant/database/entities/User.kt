@@ -1,13 +1,10 @@
-package com.scheduling.assistant.database.models
+package com.scheduling.assistant.database.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
 import javax.persistence.Column
 import javax.persistence.Id
 import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.OneToOne
-import javax.persistence.JoinColumn
 
 import org.hibernate.annotations.GenericGenerator;
 

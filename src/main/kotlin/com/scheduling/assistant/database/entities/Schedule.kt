@@ -1,16 +1,13 @@
-package com.scheduling.assistant.database.models
+package com.scheduling.assistant.database.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
 import javax.persistence.Id
 import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.OneToOne
-import javax.persistence.MapsId
-import javax.persistence.CascadeType
 
- 
+
 @Entity
 @Table(name="SCHEDULE")
 class ScheduleEntity {
@@ -19,6 +16,7 @@ class ScheduleEntity {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     var id: String = ""
 
+    // TODO: make user unique
     @OneToOne
     var user: UserEntity? = null
 

@@ -3,20 +3,12 @@ import com.scheduling.assistant.models.WeeklySchedule
 import com.scheduling.assistant.models.Interval
 
 
-import java.util.Date
-import java.util.Locale
-import java.text.SimpleDateFormat
-
-
-
-class Validator {
-    val formatter: Formatter = Formatter()
-
+class DateValidator {
     fun iso(date: String): Boolean {
         var success: Boolean = false
 
         try {
-            formatter.iso(date)
+            DateFormatter.iso(date)
             success = true
         } catch(e: Exception) {
             println("error parsing iso date")
@@ -30,7 +22,7 @@ class Validator {
         var success: Boolean = false
 
         try {
-            formatter.time(date)
+            DateFormatter.time(date)
             success = true
         } catch(e: Exception) {
             println("error parsing iso date")
@@ -41,7 +33,7 @@ class Validator {
     }
 
 
-    fun interval(interval: Interval, isTime: Boolean = true): Boolean {
+    fun interval(interval: Interval<String>, isTime: Boolean = true): Boolean {
         try {
             if (isTime) {
                 // check if time is in correct format
@@ -50,7 +42,7 @@ class Validator {
                 }
 
                 // check if start >= end
-                if (formatter.time(interval.start).after(formatter.time(interval.end))) {
+                if (DateFormatter.time(interval.start).after(DateFormatter.time(interval.end))) {
                     return false
                 }
             } else {
@@ -60,7 +52,7 @@ class Validator {
                 }
 
                 // check if start >= end
-                if (formatter.iso(interval.start).after(formatter.iso(interval.end))) {
+                if (DateFormatter.iso(interval.start).after(DateFormatter.iso(interval.end))) {
                     return false
                 }
             }
