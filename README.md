@@ -4,5 +4,16 @@ tools include Spring, SpringJPA (hibernate), PostgreSQL
 
 
 ## Setup 
-compile with 'mvn clean package'
-run with 'mvn spring-boot:run'
+compile with `mvn clean package`
+
+run with `mvn spring-boot:run`
+
+## Database Setup
+enter database credentials in application.properties with the following format:
+
+```
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.jpa.generate-ddl=true
+```

@@ -16,8 +16,8 @@ interface MeetingRepository : CrudRepository<MeetingEntity, String> {
 
     @Query("""
 		SELECT DISTINCT m.*
-		FROM meetings m
-		INNER JOIN meetings_participants p ON p.meeting_entity_id = m.id
+		FROM meeting m
+		INNER JOIN meeting_participants p ON p.meeting_entity_id = m.id
 		INNER JOIN users u ON u.id = m.host_id OR u.id = p.participants_id
 		WHERE u.id = :user_id
 		AND m.start_time >= :start

@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.io.IOException
+import java.util.Date
+
+import com.scheduling.assistant.extensions.iso
 
 @RestController
 class Meeting {
@@ -38,21 +41,22 @@ class Meeting {
         // find user id in database & check his schedule
         // check preference in months &/ weeks ahead
         var responseCode: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR
-        var userEntity: List<MeetingEntity>? = null
+        var meetings: List<MeetingEntity>? = null
 
         try {
-            userEntity = meetingRepository.findByParticipants_Id(id)
-            userEntity = userEntity.plus(meetingRepository.findByHost_Id(id))
+            meetings = meetingRepository.findByParticipants_Id(id)
+            meetings = meetings.plus(meetingRepository.findByHost_Id(id))
 
             responseCode = HttpStatus.OK
         } catch (exception: IOException) {
             println(exception)
         }
 
-        return ResponseEntity(userEntity, responseCode)
+        return ResponseEntity(meetings, responseCode)
     }
 
 
+    @CrossOrigin(origins=arrayOf("http://localhost:3000"))
     @PostMapping("/meetings")
     fun postMeeting(
         @RequestBody requestBody: Meeting,
@@ -73,6 +77,7 @@ class Meeting {
             for (participant in requestBody.participants) {
                 val user: UserEntity? = userRepository.getByEmail(participant.email)
 
+				// add user in db if not found
                 if (user == null) {
                     userRepository.save(objectMapper.map(participant))
                 }

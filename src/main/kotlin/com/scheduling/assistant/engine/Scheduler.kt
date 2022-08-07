@@ -68,6 +68,7 @@ class Scheduler {
                 id, startDate.iso(), endDate.iso()
             ).map { Interval(it.start_time.iso(), it.end_time.iso()) }
         )
+        println(meetingIntervals)
 
         meetingIntervals.sortBy { it.start }
 
@@ -76,7 +77,8 @@ class Scheduler {
         for (i in 1 until meetingIntervals.count()) {
             if (meetingIntervals[i - 1].end < meetingIntervals[i].start) {
                 availableIntervals.add(
-                    Interval(meetingIntervals[i - 1].end.iso(), meetingIntervals[i].start.iso())
+                    Interval(meetingIntervals[i - 1].end.iso(), 
+                    meetingIntervals[i].start.iso())
                 )
             }
         }
@@ -100,6 +102,7 @@ class Scheduler {
 
     fun suggestMeetings(userId: String, dateText: String, duration: Int): List<Interval<String>> {
         val availableIntervals: List<Interval<String>> = findUserAvailabilityOn(userId, dateText)
+        println(availableIntervals)
         var suggestedMeetings: MutableList<Interval<String>> = mutableListOf()
 
         for (interval in availableIntervals) {
@@ -124,8 +127,12 @@ class Scheduler {
             return false
         }
 
-        val userMeetings: Iterable<MeetingEntity> = meetingRepository.findByHost_Email(email)
+        // don't allow users to schedule meetings past today's time
+        if (meeting.start_time.iso() < Date()) {
+          return false
+        }
 
+        val userMeetings: Iterable<MeetingEntity> = meetingRepository.findByHost_Email(email)
         for (userMeeting: MeetingEntity in userMeetings) {
             val isBusy = isOverlap(
                 Interval(meeting.start_time.iso(), meeting.end_time.iso()),
