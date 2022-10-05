@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "f4c3c3da-fcfe-4917-a1c9-625a7df4fdef",
+		"name": "SCHEDULE ASSISTANT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get schedule",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/schedule/ebd5c387-ca0c-421b-b864-8d4a2e72658f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"schedule",
+						"ebd5c387-ca0c-421b-b864-8d4a2e72658f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post schedule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"weekly\": {\n        \"monday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"tuesday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"wednesday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"thursday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"friday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"saturday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        },\n        \"sunday\": {\n            \"start\": \"06:06 AM\",\n            \"end\": \"06:07 AM\"\n        }\n    },\n    \"timezone\": \"America/Los_Angeles\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/schedule/deirdreamuel3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"schedule",
+						"deirdreamuel3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Deirdre\",\n    \"last_name\": \"Chong\",\n    \"username\": \"deirdreamuel2\",\n    \"email\": \"deirdreamuel2@gmail.com\",\n    \"schedule\": {\n        \"weekly\": {\n            \"monday\": {\n                \"start\": \"09:00 AM\",\n                \"end\": \"05:00 PM\"\n            },\n            \"tuesday\": {\n                \"start\": \"09:00 AM\",\n                \"end\": \"05:00 PM\"\n            },\n            \"wednesday\": {\n                \"start\": \"09:00 AM\",\n                \"end\": \"05:00 PM\"\n            },\n            \"thursday\": {\n                \"start\": \"09:00 AM\",\n                \"end\": \"05:00 PM\"\n            },\n            \"friday\": {\n                \"start\": \"09:00 AM\",\n                \"end\": \"05:00 PM\"\n            },\n            \"saturday\": {\n                \"start\": \"00:00 AM\",\n                \"end\": \"00:00 AM\"\n            },\n            \"sunday\": {\n                \"start\": \"00:00 AM\",\n                \"end\": \"00:00 AM\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/setup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get meetings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/meetings/227937d3-d5ff-4c69-907a-f84062d76532",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meetings",
+						"227937d3-d5ff-4c69-907a-f84062d76532"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post meeting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start_time\": \"2022-06-27T17:00Z\",\n    \"end_time\": \"2022-06-28T01:00Z\",\n    \"title\": \"Meeting w/ Deirdre\",\n    \"notes\": \"This meeting has been rescheduled\",\n    \"participants\": [\n        {\n            \"first_name\": \"Tesdsft\",\n            \"last_name\": \"Chong\",\n            \"email\": \"deirdreamuel+21@gmail.com\"\n        },\n        {\n            \"first_name\": \"Te234sttt\",\n            \"last_name\": \"Chong\",\n            \"email\": \"deirdreamuel+3212@gmail.com\"\n        },\n        {\n            \"first_name\": \"sdfsdf\",\n            \"last_name\": \"Testtsdftt\",\n            \"email\": \"deirdreamuel+2341@gmail.com\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/meetings?id=ff808081812d395601812d39c4cf0000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meetings"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "deirdre@gmail.com",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "ff808081812d395601812d39c4cf0000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete meetings",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/meetings/ff8080818127541c018127551ffe0000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meetings",
+						"ff8080818127541c018127551ffe0000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get availability",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get suggestions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
